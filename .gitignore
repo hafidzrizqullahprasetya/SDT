@@ -3,3 +3,9 @@ __pycache__/
 *.pyc
 *.crdownload
 .DS_Store
+*.aux
+*.out
+*.log
+*.toc
+preview/
+uts_extracted/

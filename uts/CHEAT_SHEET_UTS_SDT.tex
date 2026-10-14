@@ -1,0 +1,734 @@
+% ============================================================================
+% MASTER CHEAT SHEET: SAINS DATA TERAPAN (SVPL261506)
+% UJIAN TENGAH SEMESTER (UTS) GASAL 2026/2027 - OPEN BOOK REFERENCE
+% Dosen: Dr. Muhammad Fakhrurrifqi, S.Kom., M.Cs.
+% Mahasiswa: Hafidz Rizqullah Prasetya (NIU: 535493) - TRPL UGM
+% ============================================================================
+\documentclass[7.5pt,landscape,a4paper]{extarticle}
+
+% --- GEOMETRY ---
+\usepackage[landscape,margin=4mm,top=5mm,bottom=4mm,left=4mm,right=4mm]{geometry}
+
+% --- ENCODING & FONTS ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% --- LAYOUT ---
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{array}
+
+% --- COLORS & VISUAL ---
+\usepackage[table]{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+
+% --- MATH & CODE ---
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{listings}
+\usepackage{hyperref}
+
+% --- COLOR PALETTE ---
+\definecolor{sdtNavy}{RGB}{18, 52, 86}       % Header utama
+\definecolor{sdtBlue}{RGB}{28, 92, 148}      % Sub-header
+\definecolor{sdtDarkGray}{RGB}{60, 64, 67}   % Text sekunder
+\definecolor{sdtBgGray}{RGB}{245, 247, 250}  % Background box/tabel
+\definecolor{sdtRed}{RGB}{175, 35, 35}       % Warning / penting
+\definecolor{sdtGreen}{RGB}{22, 110, 55}     % Quiz / kunci jawaban
+\definecolor{sdtPurple}{RGB}{105, 35, 125}   % Algoritma & sintaks
+
+% --- GLOBAL SPACING ---
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1pt}
+\setlength{\columnsep}{3.5mm}
+\setlength{\columnseprule}{0.2pt}
+\def\columnseprulecolor{\color{sdtNavy!25}}
+\linespread{0.87}
+
+% --- LIST COMPACTION ---
+\setlist{nosep, leftmargin=*, topsep=0pt, partopsep=0pt, parsep=0pt, itemsep=0.5pt}
+\setlist[itemize]{leftmargin=2.5mm, label={\textcolor{sdtNavy}{\tiny\textbullet}}}
+\setlist[enumerate]{leftmargin=3mm}
+
+% --- MATH COMPACTION ---
+\AtBeginDocument{
+    \setlength{\abovedisplayskip}{1pt}
+    \setlength{\belowdisplayskip}{1pt}
+    \setlength{\abovedisplayshortskip}{0pt}
+    \setlength{\belowdisplayshortskip}{0pt}
+    \setlength{\jot}{1pt}
+}
+
+% --- SECTION FORMATTING ---
+\titleformat{\section}
+    {\bfseries\fontsize{7.8pt}{8.8pt}\selectfont\color{white}}
+    {}{0pt}{}
+\titlespacing*{\section}{0pt}{2pt plus 1pt}{1.5pt}
+
+\newcommand{\sdtSection}[2][sdtNavy]{%
+    \vspace{1.5pt}%
+    \noindent\colorbox{#1}{%
+        \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+            \textbf{\fontsize{7.5pt}{8.5pt}\selectfont\color{white}#2}%
+        }%
+    }\vspace{0.5pt}%
+}
+
+\newcommand{\sdtSub}[1]{%
+    \vspace{1pt}%
+    \noindent\textbf{\fontsize{6.8pt}{7.8pt}\selectfont\color{sdtBlue}#1}\vspace{0.2pt}%
+}
+
+\newcommand{\alertBox}[2][sdtRed]{%
+    \begin{tcolorbox}[
+        enhanced, frame hidden,
+        borderline west={1.5pt}{0pt}{#1},
+        colback=#1!5,
+        top=0.4mm, bottom=0.4mm, left=1.2mm, right=0.8mm,
+        before skip=0.8mm, after skip=0.8mm
+    ]
+        {\fontsize{6.5pt}{7.5pt}\selectfont#2}
+    \end{tcolorbox}
+}
+
+\newcommand{\quizBox}[2]{%
+    \begin{tcolorbox}[
+        enhanced, frame hidden,
+        borderline west={1.5pt}{0pt}{sdtGreen},
+        colback=sdtGreen!4,
+        top=0.3mm, bottom=0.3mm, left=1.2mm, right=0.8mm,
+        before skip=0.6mm, after skip=0.6mm
+    ]
+        {\fontsize{6.2pt}{7.2pt}\selectfont\textbf{\color{sdtGreen}Q: #1}\\ \textbf{A:} #2}
+    \end{tcolorbox}
+}
+
+% --- CODE LISTING STYLE ---
+\lstdefinestyle{sdtCode}{
+    basicstyle=\ttfamily\fontsize{5.8pt}{6.8pt}\selectfont,
+    backgroundcolor=\color{sdtBgGray},
+    frame=none,
+    numbers=none,
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=2,
+    columns=flexible,
+    keepspaces=true,
+    xleftmargin=0.5mm,
+    xrightmargin=0.5mm,
+    aboveskip=0.4mm,
+    belowskip=0.4mm,
+    keywordstyle=\color{sdtNavy}\bfseries,
+    commentstyle=\color{sdtDarkGray}\itshape,
+    stringstyle=\color{sdtPurple}
+}
+\lstset{style=sdtCode}
+
+\begin{document}
+
+% --- TITLE BANNER ---
+\noindent\colorbox{sdtNavy}{%
+    \parbox{\dimexpr\textwidth-2\fboxsep\relax}{%
+        \color{white}%
+        \textbf{\fontsize{9pt}{10pt}\selectfont MASTER CHEAT SHEET: SAINS DATA TERAPAN (SVPL261506) -- OPEN BOOK UTS GASAL 2026/2027}%
+        \hfill%
+        \fontsize{6.5pt}{7.5pt}\selectfont Dosen: Dr. Muhammad Fakhrurrifqi, M.Cs. \textbar{} TRPL Sekolah Vokasi UGM \textbar{} Kursi: 8 (HU 209)%
+    }%
+}
+\vspace{0.8mm}
+
+\begin{multicols*}{3}
+
+% ============================================================================
+% MODUL 1: PENDAHULUAN SAINS DATA & AI TERAPAN
+% ============================================================================
+\sdtSection{1. PENDAHULUAN SAINS DATA \& AI TERAPAN}
+
+\sdtSub{Definisi \& Milestone Artificial Intelligence (AI)}
+\begin{itemize}
+    \item \textbf{Definisi AI:} Sistem komputasi yang dirancang untuk meniru kecerdasan manusia (kemampuan belajar dari pengalaman, penalaran logis, pemecahan masalah, persepsi sensorik, dan pemahaman bahasa).
+    \item \textbf{Deep Blue (IBM, 1997):} Mengalahkan juara catur dunia Garry Kasparov berbasis pencarian pohon status dan komputasi brute-force cerdas.
+    \item \textbf{AlphaGo (DeepMind, 2016):} Mengalahkan juara dunia Go (Lee Sedol, 4-1) menggunakan Deep Reinforcement Learning \& Monte Carlo Tree Search.
+    \item \textbf{Perbedaan Utama AI vs Manusia:} AI unggul dalam kecepatan memproses volume data raksasa ($>$ jutaan data/detik), bebas kelelahan fisik, dan replikasi konsisten. Manusia unggul dalam penalaran kausal abstrak, intuisi etis, dan adaptasi tanpa preseden data masa lalu.
+\end{itemize}
+
+\sdtSub{Dinamika Ketenagakerjaan (WEF Future of Jobs 2025--2030)}
+\begin{itemize}
+    \item \textbf{Fastest Growing Jobs:} AI \& Machine Learning Specialists, Data Analysts \& Scientists, Big Data Specialists, Information Security Analysts, Fintech Engineers.
+    \item \textbf{Fastest Declining Jobs:} Data Entry Clerks, Administrative/Executive Secretaries, Accounting/Payroll Clerks, Bank Tellers.
+    \item \textbf{Dampak Rendah:} Pekerjaan manual lapangan terampil (konstruksi fisik, pertanian, perawat pasien langsung).
+\end{itemize}
+
+\sdtSub{Aplikasi Nyata AI \& Tantangan Etika}
+\begin{itemize}
+    \item \textbf{Verification \& Identification:} Biometrik suara (Voice biometrics), Facial recognition, deteksi liveness untuk autentikasi perbankan/fintech.
+    \item \textbf{Autonomous Vehicle (Mobil Otonom):} Persepsi sensorik (LiDAR, kamera), pemetaan spasial, decision control.
+    \item \textbf{Isu Pertanggungjawaban (Liability):} Jika mobil otonom mengalami kecelakaan, siapa yang bersalah? Produsen hardware, pengembang algoritma, pengguna, atau regulator?
+\end{itemize}
+
+\sdtSub{Trifecta: Big Data, Data Science, dan AI}
+\begin{itemize}
+    \item \textbf{Big Data:} Bahan mentah berkarakteristik 5V (Volume, Velocity, Variety, Veracity, Value).
+    \item \textbf{Data Science:} Disiplin gabungan statistika, ilmu komputer, dan domain bisnis untuk mengekstraksi pola/pengetahuan.
+    \item \textbf{Artificial Intelligence:} Agen cerdas/sistem yang memanfaatkan wawasan data science untuk mengambil tindakan otonom/prediktif.
+\end{itemize}
+
+\sdtSub{Peran SDM dalam Tim Data Science (Standar BNSP)}
+\begin{itemize}
+    \item \textbf{Data Scientist:} Mengembangkan model analitik/ML terbaik untuk menjawab masalah bisnis (matematika, algoritma, validasi).
+    \item \textbf{Data Analyst:} Menganalisis data historis untuk mencari insight dan menyajikannya dalam dashboard/laporan interaktif (SQL, BI).
+    \item \textbf{Data Engineer / MLOps:} Menyiapkan infrastruktur data, pipeline ETL/ELT, dan deployment model ke sistem produksi (Docker, cloud, API).
+    \item \textbf{Business Analyst:} Menerjemahkan tujuan bisnis ke rumusan masalah data dan memvalidasi kelayakan operasional.
+\end{itemize}
+
+% ============================================================================
+% MODUL 2: METODOLOGI PENGEMBANGAN AI & CRISP-DM
+% ============================================================================
+\sdtSection{2. METODOLOGI PENGEMBANGAN AI \& CRISP-DM}
+
+\sdtSub{Piramida DIKW (Data $\rightarrow$ Information $\rightarrow$ Knowledge $\rightarrow$ Wisdom)}
+\begin{itemize}
+    \item \textbf{Data (Paling Dasar):} Fakta mentah atau himpunan angka acak tanpa konteks (contoh: \textit{"38, 70"}).
+    \item \textbf{Information:} Data yang telah diberi konteks, makna, dan relasi (contoh: \textit{"Suhu 38$^\circ$C, kelembapan 70\%"}). Menjawab: \textit{What, Who, When, Where}.
+    \item \textbf{Knowledge:} Sintesis informasi yang dihubungkan dengan pemahaman pola/kausalitas (contoh: \textit{"Suhu 38$^\circ$C + kelembapan 70\% memicu heat stroke pada pekerja shift siang"}). Menjawab: \textit{How}.
+    \item \textbf{Wisdom (Puncak):} Penerapan pengetahuan dengan pertimbangan etika, dampak jangka panjang, dan tindakan strategis (contoh: \textit{"Kebijakan merotasi jam kerja ke pagi/malam demi menjaga keselamatan pekerja"}). Menjawab: \textit{Why}.
+\end{itemize}
+
+\sdtSub{Dua Fase Sistem AI Berbasis Data}
+\begin{enumerate}
+    \item \textbf{Training Phase:} Data Historis $\rightarrow$ Feature Engineering $\rightarrow$ Algoritma $\rightarrow$ Model Terlatih (Trained Model).
+    \item \textbf{Inference Phase:} Data Baru (Live Input) $\rightarrow$ Model Terlatih $\rightarrow$ Keputusan / Prediksi Real-time.
+\end{enumerate}
+
+\sdtSub{Taksonomi Tugas Analitik (Analytic Tasks)}
+\begin{itemize}
+    \item \textbf{Regression / Estimation:} Memprediksi nilai numerik kontinu. Target: harga properti, suhu, masa pakai mesin, estimasi pendapatan. Metrik: RMSE, MAE, $R^2$, MAPE.
+    \item \textbf{Classification:} Memprediksi kategori diskrit/label kelas. Target: Risiko kredit (Tinggi/Rendah), Fraud/Valid, Churn/Loyal. Metrik: Accuracy, Precision, Recall, F1-Score, AUC-ROC.
+    \item \textbf{Clustering:} Mengelompokkan observasi berdasarkan kemiripan pola tanpa label target (Unsupervised). Contoh: Segmentasi profil nasabah.
+    \item \textbf{Association:} Menemukan hubungan antarentitas (Market Basket Analysis).
+\end{itemize}
+
+\sdtSub{Penyebab Kegagalan Proyek AI/DS (Riset Orgvue \& Gartner)}
+\begin{itemize}
+    \item \textbf{Ketidaksesuaian Bisnis \& Teknis:} Algoritma canggih namun tidak menyelesaikan masalah bisnis utama (*wrong problem definition*).
+    \item \textbf{Garbage In, Garbage Out (GIGO):} Kualitas data masukan buruk/inkonsisten $\rightarrow$ model menghasilkan prediksi tidak bernilai.
+    \item \textbf{Data Leakage:} Informasi dari data pengujian (*test set*) bocor ke data pelatihan (*training set*) saat preprocessing $\rightarrow$ metrik training sangat tinggi (overfitting semu), namun gagal total di data produksi.
+    \item \textbf{Kegagalan Deployment:} Model hanya berjalan di Jupyter Notebook, gagal diintegrasikan ke sistem informasi berjalan (latensi tinggi, crash infrastruktur).
+    \item \textbf{Ketiadaan Monitoring:} Tidak ada pemantauan terhadap pergeseran distribusi data (*data drift* / *concept drift*) setelah model rilis.
+\end{itemize}
+
+\sdtSub{Perbandingan SDLC (Software Development Life Cycle)}
+\begin{itemize}
+    \item \textbf{Waterfall:} Sekuensial linier satu arah. Cocok saat kebutuhan sistem sudah sangat pasti dan tidak berubah sejak awal.
+    \item \textbf{Prototype:} Membuat purwarupa cepat untuk validasi pengguna sebelum produk final. Sangat cocok saat kebutuhan pengguna belum jelas.
+    \item \textbf{RAD (Rapid Application Development):} Pendekatan iteratif berorientasi tenggat waktu ketat (*time-boxed*) dan efisiensi biaya.
+    \item \textbf{Agile / Scrum:} Iterasi pendek (sprint), sangat adaptif terhadap perubahan kebutuhan kapan pun.
+    \item \textbf{BPMN (Business Process Model and Notation):} Standar visualisasi alur proses bisnis organisasi (aktivitas, gateway, swimlane).
+\end{itemize}
+
+\sdtSub{Metodologi Khusus Data Science: SEMMA vs CRISP-DM}
+\begin{itemize}
+    \item \textbf{SEMMA (SAS):} \textit{Sample $\rightarrow$ Explore $\rightarrow$ Modify $\rightarrow$ Model $\rightarrow$ Assess}. Murni berfokus pada tahapan teknis pemodelan.
+    \item \textbf{CRISP-DM:} Standar industri paling populer. Sifat: \textit{Non-proprietary}, netral alat (*tool-neutral*), netral aplikasi/industri, dan berpusat pada solusi bisnis.
+\end{itemize}
+
+\sdtSub{6 Fase Siklus CRISP-DM Secara Mendalam}
+\begin{enumerate}
+    \item \textbf{Business Understanding:}
+    \begin{itemize}
+        \item Menentukan tujuan bisnis: misal menurunkan rasio NPL (*Non-Performing Loan*) kredit bank.
+        \item Menilai situasi riil: inventarisasi data internal/eksternal, analisis kelayakan biaya/manfaat (*cost-benefit*).
+        \item Menentukan tugas analitik: Klasifikasi nasabah (High-risk vs Low-risk), metrik keberhasilan F1-Score $\geq 0.85$.
+        \item Merumuskan Project Plan: scope, timeline, alokasi peran SDM.
+    \end{itemize}
+    \item \textbf{Data Understanding:}
+    \begin{itemize}
+        \item Pengumpulan data awal (internal DB core banking, BI checking).
+        \item Deskripsi data (jumlah record $N$, jumlah fitur $D$, tipe skala).
+        \item Eksplorasi data (EDA): visualisasi distribusi, korelasi fitur.
+        \item Verifikasi kualitas data (identifikasi missing value, data error).
+    \end{itemize}
+    \item \textbf{Data Preparation (70--80\% Total Waktu):}
+    \begin{itemize}
+        \item Seleksi data: memilih baris/fitur yang relevan dengan target.
+        \item Pembersihan data: menangani data hilang, outlier, duplikat.
+        \item Rekayasa fitur (*Feature Engineering*): membuat fitur turunan (contoh: rasio hutang terhadap pendapatan).
+        \item Integrasi data: menggabungkan tabel rekening dan histori kredit.
+        \item Pemformatan: normalisasi/standardisasi, encoding kategorikal.
+    \end{itemize}
+    \item \textbf{Modeling:}
+    \begin{itemize}
+        \item Memilih teknik pemodelan: Decision Tree, Random Forest, SVM, XGBoost, LogReg.
+        \item Merancang pengujian: Split data (Training 70\%, Testing 30\%) atau Stratified $k$-Fold Cross Validation.
+        \item Pembangunan model \& tuning hyperparameter (Grid Search).
+        \item Penilaian model: evaluasi teknis pada data uji.
+    \end{itemize}
+    \item \textbf{Evaluation:}
+    \begin{itemize}
+        \item Menilai apakah model mencapai target bisnis (apakah rasio NPL bank benar-benar turun dan ROI positif?).
+        \item Review proses: cek potensi data leakage atau overfitting.
+        \item Menentukan langkah lanjutan: rilis ke produksi atau iterasi ulang.
+    \end{itemize}
+    \item \textbf{Deployment:}
+    \begin{itemize}
+        \item Integrasi model ke aplikasi operasional (REST API / microservice).
+        \item Monitoring \& maintenance: memantau performa model terhadap data live dan menyiapkan skema retraining berkala.
+    \end{itemize}
+\end{enumerate}
+
+\alertBox[sdtNavy]{
+\textbf{Prinsip Kritis Abraham Wald (Survivorship Bias):}
+Saat PD II, militer AS ingin memperkuat pelindung pesawat pengebom pada area yang penuh lubang peluru (sayap dan ekor). Abraham Wald menyadari bahwa bagian yang harus diperkuat adalah area TANPA lubang peluru (mesin dan kokpit), karena pesawat yang tertembak di mesin tidak pernah selamat kembali untuk dihitung! Dalam data science: cermati data yang TIDAK hadir (*missing population*).
+}
+
+% ============================================================================
+% MODUL 3: DATA UNDERSTANDING & KARAKTERISTIK DATA
+% ============================================================================
+\sdtSection{3. DATA UNDERSTANDING \& KARAKTERISTIK DATA}
+
+\sdtSub{Tujuan \& 4 Dokumen Luaran Data Understanding}
+Tahap telaah data dilakukan setelah Business Understanding. Tujuannya memastikan kelayakan data sebagai bahan mentah solusi AI. Luaran formal:
+\begin{enumerate}
+    \item \textbf{Data Collection Report:} Dokumen asal sumber data (internal/eksternal), izin akses, metode ekstraksi, volume file.
+    \item \textbf{Data Description Report:} Karakteristik fisik dataset: jumlah record ($N$), jumlah atribut/kolom ($D$), tipe data teknis, ukuran RAM.
+    \item \textbf{Data Exploration Report:} Temuan eksploratif visual dan statistik deskriptif, pola hubungan variabel, hipotesis awal.
+    \item \textbf{Data Quality Report:} Laporan masalah kualitas: persentase missing values, nilai tidak wajar (*anomali*), inkonsistensi penulisan, outlier.
+\end{enumerate}
+
+\sdtSub{Sumber Data: Internal vs Eksternal (Online)}
+\begin{itemize}
+    \item \textbf{Internal:} Sistem informasi perusahaan, log transaksi, database ERP/CRM (MySQL, PostgreSQL), spreadsheet (Excel, CSV, JSON).
+    \item \textbf{Eksternal Publik:} Portal Satu Data Indonesia (\url{https://data.go.id}), BPS, Google Dataset Search, UNICEF/WHO Data, Kaggle Repository.
+\end{itemize}
+
+\sdtSub{Susunan \& Istilah Data}
+\begin{itemize}
+    \item \textbf{Datum (Butir Data):} Unit data tunggal terkecil yang merepresentasikan satu nilai dari suatu variabel tertentu.
+    \item \textbf{Record / Baris / Observasi / Tuple:} Kumpulan butir data dari satu entitas objek lengkap.
+    \item \textbf{Attribute / Fitur / Kolom / Variabel:} Karakteristik atau dimensi pengamatan dari suatu record.
+\end{itemize}
+
+\sdtSub{Klasifikasi Tipe Data Berdasarkan Susunan (Struktur)}
+\begin{itemize}
+    \item \textbf{Structured Data:} Data berformat baris dan kolom yang kaku, mengikuti skema relasional tabel RDBMS.
+    \item \textbf{Semi-Structured Data:} Data yang memiliki tag/penanda hierarki internal tetapi tidak berbentuk tabel tabular kaku. Contoh: JSON, XML, NoSQL document, pesan email (memiliki header terstruktur: pengirim, tanggal, subjek; tetapi isi pesan berupa teks bebas tak beraturan).
+    \item \textbf{Unstructured Data:} Data tanpa skema terdefinisi, seperti dokumen teks bebas, file rekaman audio, gambar digital, dan video.
+\end{itemize}
+
+\sdtSub{Klasifikasi Berdasarkan Cara Pengumpulan}
+\begin{itemize}
+    \item \textbf{Data Primer:} Data yang diambil/dikumpulkan langsung oleh peneliti dari sumber aslinya (survei langsung, sensor IoT, kuesioner).
+    \item \textbf{Data Sekunder:} Data yang didapatkan dari pihak ketiga yang telah mengumpulkannya sebelumnya (laporan BPS, dokumen sensus, open data).
+\end{itemize}
+
+\sdtSub{Klasifikasi Berdasarkan Skala Pengukuran (Stevens' Scales)}
+\begin{itemize}
+    \item \textbf{Nominal:} Kategori murni tanpa urutan atau peringkat. Contoh: Jenis Kelamin, Warna Mobil, Agama, ID Pekerja, Shift Kerja. Operasi: Modus, Frekuensi, Bar Chart.
+    \item \textbf{Ordinal:} Kategori yang memiliki urutan/tingkatan logis, tetapi rentang jarak antarnilai tidak dapat diukur pasti. Contoh: Tingkat Pendidikan (SD, SMP, SMA), Skala Likert (Sangat Tidak Setuju s.d. Sangat Setuju), Skor Kelelahan (1 s.d. 10). Operasi: Median, Persentil, Peringkat.
+    \item \textbf{Interval:} Nilai numerik dengan interval jarak yang sama dan terukur, tetapi \textbf{TIDAK MEMILIKI nilai nol mutlak} (angka 0 bukan berarti ketiadaan atribut). Contoh: Suhu ($0^\circ\text{C}$ tetap memiliki panas tertentu), Tahun Kalender. Operasi: Penjumlahan, Pengurangan, Rata-rata.
+    \item \textbf{Ratio:} Nilai numerik yang memiliki interval teratur dan \textbf{MEMILIKI nilai nol mutlak} (angka 0 berarti tidak ada atribut sama sekali) serta berlaku rasio kelipatan. Contoh: Usia, Jam Kerja, Gaji, Berat Badan (10 jam adalah 2x lipat dari 5 jam). Operasi: Semua operasi matematika.
+    \item \textbf{Data Dikotomi (Dichotomous / Binary):} Varian data nominal yang hanya memiliki \textbf{tepat dua pilihan kategori diskrit} saling eksklusif (contoh: Ya/Tidak, Lulus/Gagal, Default/Lancar, Pria/Wanita).
+\end{itemize}
+
+\sdtSub{Klasifikasi Berdasarkan Dimensi Waktu}
+\begin{itemize}
+    \item \textbf{Cross-Sectional Data:} Data yang dikumpulkan pada \textbf{satu titik waktu tertentu} dari banyak subjek/entitas berbeda (contoh: survei beban kerja 500 karyawan di pabrik pada Agustus 2026).
+    \item \textbf{Time-Series Data (Deret Waktu / Longitudinal):} Data yang dicatat secara berkala berurutan dari waktu ke waktu pada entitas yang sama (contoh: riwayat harian kurs IDR/USD dari 2016 s.d. 2020, histori harga saham).
+\end{itemize}
+
+\sdtSub{Contoh Model Representasi Data}
+\begin{itemize}
+    \item \textbf{Tabular Model:} Matriks $N$ record $\times$ $D$ atribut.
+    \item \textbf{Graph / Network Model:} Himpunan Simpul (\textit{Nodes}) dan Garis (\textit{Edges}). Simpul mewakili objek/entitas, garis mewakili hubungan relasional (contoh: graf relasi sosial, struktur senyawa kimia, peta rute).
+    \item \textbf{Sequence Model:} Rantai data yang terhubung berurutan (contoh: deret kode DNA, riwayat jejak klik situs web / clickstream).
+\end{itemize}
+
+% ============================================================================
+% MODUL 4: EXPLORATORY DATA ANALYSIS (EDA) & STUDI KASUS K3
+% ============================================================================
+\sdtSection{4. EXPLORATORY DATA ANALYSIS (EDA) \& K3}
+
+\sdtSub{Definisi \& Filosofi EDA}
+\begin{itemize}
+    \item \textbf{Definisi:} Proses eksplorasi dan pemahaman data secara sistematis untuk mengungkap pola tersembunyi, karakteristik distribusi, anomali, serta relasi antarvariabel sebelum pembuatan model prediktif.
+    \item \textbf{Prinsip:} "EDA adalah proses mengenal data sebelum kita meminta data menjawab pertanyaan kompleks."
+    \item \textbf{Alur Kerja Analis:} Data Mentah $\rightarrow$ EDA (Pemahaman) $\rightarrow$ Data Preparation $\rightarrow$ Modeling $\rightarrow$ Evaluasi \& Insight.
+\end{itemize}
+
+\sdtSub{Studi Kasus K3 (Keselamatan Kerja) -- 500 Pekerja Pabrik}
+\begin{itemize}
+    \item \textbf{Latar Belakang:} Perusahaan mengumpulkan catatan 500 pekerja: Usia, Masa Kerja, Jam Kerja/Hari, Shift (Pagi/Siang/Malam), Durasi Tidur, Skor Kelelahan (1--10), Stres Kerja (1--10), Near Miss (Hampir Celaka: Ya/Tidak).
+    \item \textbf{Pertanyaan Bisnis:} "Mengapa sebagian pekerja lebih sering mengalami insiden near miss?"
+\end{itemize}
+
+\sdtSub{Prinsip Kritis 1: Angka Absolut vs Proporsi Persentase}
+\begin{center}
+{\fontsize{6pt}{7pt}\selectfont
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Shift Kerja} & \textbf{Total Pekerja} & \textbf{Near Miss} & \textbf{Proporsi Risiko (\%)} \\
+\midrule
+Pagi & 200 & 20 & $20/200 = \mathbf{10.0\%}$ \\
+Siang & 200 & 30 & $30/200 = \mathbf{15.0\%}$ \\
+Malam & 100 & 25 & $25/100 = \mathbf{25.0\%}$ \\
+\bottomrule
+\end{tabular}}
+\end{center}
+\alertBox[sdtRed]{
+\textbf{Pelajaran Kritis EDA:}
+Secara absolut, insiden shift siang tampak paling banyak (30 kasus vs 25 kasus). Namun secara relatif, \textbf{pekerja shift malam menghadapi risiko 25\%} (jauh lebih tinggi dibanding siang 15\% dan pagi 10\%). \textbf{Jangan pernah mengambil kesimpulan analitik hanya dari angka absolut tanpa menghitung proporsi ukuran populasi!}
+}
+
+\sdtSub{Prinsip Kritis 2: Perspektif Manusia pada Missing Value}
+Missing value pada variabel sensitif (contoh: 23\% data Stres Kerja kosong) BUKAN sekadar error teknis sensor yang dibuang begitu saja. Ini mencerminkan \textbf{perilaku psikologis manusia}: pekerja enggan/takut mengisi karena khawatir dinilai buruk oleh manajemen, atau beban kerja terlalu padat sehingga survei tidak sempat diisi.
+
+\sdtSub{Prinsip Kritis 3: Jangan Asal Hapus Outlier!}
+\begin{itemize}
+    \item \textbf{Data Error (Wajib Dibersihkan):} Nilai fisik mustahil akibat salah input/rusak sensor (contoh: Usia = 5 tahun, Jam Kerja = 30 jam/hari, Durasi Tidur = 25 jam, Kelelahan = 15/10).
+    \item \textbf{Outlier Kondisi Nyata (Sangat Berharga):} Jam kerja 15 jam/hari atau skor kelelahan 10/10 pada pekerja shift malam adalah \textbf{alarm darurat lapangan} (indikasi lembur ilegal beruntun, beban fisik ekstrem, insomnia parah). Menghapus outlier ini akan menghilangkan sinyal keselamatan paling krusial!
+\end{itemize}
+
+\sdtSub{Prinsip Kritis 4: Korelasi Bukan Kausalitas (Rantai Kausal)}
+Korelasi kuat antara Kelelahan dan Near Miss tidak berarti kelelahan langsung menyebabkan kecelakaan secara otomatis. Ada rantai kausalitas perantara:
+\begin{center}
+{\fontsize{6pt}{7pt}\selectfont \textbf{Shift Malam} $\rightarrow$ \textbf{Tidur Buruk} $\rightarrow$ \textbf{Lelah Akumulatif} $\rightarrow$ \textbf{Fokus Turun} $\rightarrow$ \textbf{Near Miss}}
+\end{center}
+
+\sdtSub{Panduan Pemilihan Grafik Visualisasi EDA}
+\begin{itemize}
+    \item \textbf{Pie Chart:} Memperlihatkan proporsi persentase kategori terhadap total keseluruhan ($\leq 5$ kategori).
+    \item \textbf{Bar Chart:} Membandingkan frekuensi/agregasi data kategorikal.
+    \item \textbf{Line Graph:} Menampilkan tren perubahan kontinu dari waktu ke waktu (deret waktu).
+    \item \textbf{Scatter Plot:} Memeriksa pola hubungan linear/non-linear dan sebaran outlier antara dua variabel numerik kontinu.
+    \item \textbf{Histogram:} Menampilkan distribusi frekuensi data numerik kontinu ke dalam bin/interval kelas.
+    \item \textbf{Heatmap:} Matriks pemetaan kode warna untuk merepresentasikan nilai/kepadatan relasional (tabel korelasi, pivot table).
+    \item \textbf{Boxplot:} Menampilkan sebaran statistik 5 angka: Nilai Minimum, Kuartil 1 ($Q_1$), Median ($Q_2$), Kuartil 3 ($Q_3$), Nilai Maksimum, serta titik pencilan (*outliers* di luar $1.5 \times IQR$).
+\end{itemize}
+
+\sdtSub{Statistika Inferensial dalam EDA: Korelasi \& ANOVA}
+\begin{itemize}
+    \item \textbf{Pearson Correlation ($r$):} Derajat hubungan linear antara dua variabel kontinu, $r \in [-1, 1]$. Nilai $+1$ linear positif sempurna, $-1$ linear negatif sempurna, $0$ tidak ada hubungan linear.
+    \item \textbf{P-Value pada Uji Korelasi:}
+    \begin{itemize}
+        \item $p < 0.001$: Sangat signifikan secara statistik (probabilitas hubungan terjadi karena kebetulan acak $< 0.1\%$).
+        \item $p < 0.05$: Hubungan signifikan pada tingkat kepercayaan 95\%.
+        \item $p \geq 0.05$: Hubungan tidak signifikan secara statistik (terima $H_0$).
+    \end{itemize}
+    \item \textbf{ANOVA (Analysis of Variance):}
+    \begin{itemize}
+        \item Menguji apakah ada perbedaan nilai rata-rata (*mean*) yang signifikan antara \textbf{3 kelompok atau lebih}.
+        \item $H_0$: Seluruh rata-rata kelompok adalah sama ($\mu_1 = \mu_2 = \mu_3$).
+        \item $H_1$: Minimal ada satu kelompok yang rata-ratanya berbeda secara nyata.
+        \item \textbf{Nilai F-Score Besar \& P-value $\approx 0$:} Menunjukkan variasi nilai antarkelompok jauh lebih besar dibandingkan variasi di dalam masing-masing kelompok (perbedaan antarkelompok signifikan).
+        \item \textit{Catatan:} ANOVA tidak memberitahu pasangan kelompok mana yang berbeda; dibutuhkan uji lanjut (*post-hoc test* seperti Tukey HSD).
+    \end{itemize}
+\end{itemize}
+
+% ============================================================================
+% MODUL 5: DATA PREPARATION & TRANSFORMASI FITUR
+% ============================================================================
+\sdtSection{5. DATA PREPARATION \& TRANSFORMASI FITUR}
+
+\sdtSub{Kedudukan Data Preparation dalam CRISP-DM}
+Menghabiskan 70--80\% siklus proyek. Meliputi pembersihan data, penanganan nilai hilang, deteksi outlier, diskretisasi, transformasi penskalaan (*feature scaling*), dan rekayasa fitur (*feature engineering*).
+
+\sdtSub{Tiga Mekanisme Missing Data (Taksonomi Rubin)}
+\begin{enumerate}
+    \item \textbf{MCAR (Missing Completely At Random):}
+    \begin{itemize}
+        \item Hilangnya data murni acak, tidak bergantung pada nilai variabel apa pun (baik variabel teramati maupun yang hilang).
+        \item Contoh: Tabung sampel darah pecah tidak sengaja di lab, paket data sensor hilang karena gangguan sinyal acak.
+        \item Penanganan: Pangkas baris (*listwise deletion / trimming*) aman dilakukan tanpa menimbulkan bias statistik, atau imputasi mean/median.
+    \end{itemize}
+    \item \textbf{MAR (Missing At Random):}
+    \begin{itemize}
+        \item Hilangnya data bergantung pada variabel teramati lain yang tercatat, tetapi tidak bergantung pada variabel yang hilang itu sendiri.
+        \item Contoh: Responden pria cenderung lebih jarang menjawab pertanyaan tentang depresi dibanding responden wanita. Jika variabel gender tercatat, pola hilang dapat diprediksi.
+        \item Penanganan: Imputasi berganda (MICE), regresi, atau KNN imputation.
+    \end{itemize}
+    \item \textbf{MNAR (Missing Not At Random):}
+    \begin{itemize}
+        \item Hilangnya data berkaitan langsung dengan nilai data yang hilang itu sendiri.
+        \item Contoh: Individu bergaji sangat tinggi atau sangat rendah sengaja menolak menyebutkan nominal gaji; pekerja stres berat sengaja mengosongkan survei stres.
+        \item Penanganan: \textbf{DILARANG langsung membuang baris!} Menghapus data akan menyebabkan bias fatal pada model. Tambahkan kolom indikator biner (*Missing Indicator Flag*, 1 jika missing, 0 jika ada).
+    \end{itemize}
+\end{enumerate}
+
+\sdtSub{Teknik-Teknik Imputasi Nilai Hilang (Missing Values)}
+\begin{itemize}
+    \item \textbf{Mean / Median Imputation:} Mengganti missing value dengan nilai rata-rata (untuk distribusi normal/simetris) atau nilai median (untuk distribusi miring / *skewed* / ada outlier). Pro: Cepat, mempertahankan ukuran sampel. Kontra: Mengecilkan varians asli data dan mendistorsi korelasi.
+    \item \textbf{Arbitrary Value Imputation:} Mengganti nilai hilang dengan nilai konstan arbitrary di luar domain wajar (contoh: $-999$ atau $999$). Pro: Memberi sinyal pembeda yang tegas bagi algoritma Tree. Kontra: Merusak metrik pada algoritma berbasis jarak (KNN/SVM).
+    \item \textbf{End of Tail Imputation:} Mengganti missing value dengan nilai ekstrem di ujung ekor distribusi:
+    \begin{itemize}
+        \item Distribusi Normal: $\mu \pm 3\sigma$ (3 kali standar deviasi).
+        \item Distribusi Skewed: $Q_3 + 3 \times IQR$ atau $Q_1 - 3 \times IQR$.
+    \end{itemize}
+    \item \textbf{Frequent Category / Mode Imputation:} Mengganti dengan modus (kategori paling sering muncul) untuk variabel kategorikal.
+    \item \textbf{Random Sample Imputation:} Mengambil nilai acak dari observasi lain yang tidak kosong pada variabel yang sama. Pro: Menjaga bentuk distribusi dan varians data asli.
+    \item \textbf{Missing Category Flag:} Menambahkan kategori baru bernama \texttt{"Missing"} atau \texttt{"Unknown"} pada data kategorikal.
+    \item \textbf{Predictive Imputation (KNN \& Regresi / MICE):} Memprediksi nilai yang hilang menggunakan relasi matematis dari fitur-fitur pendukung lain. Akurasi tinggi namun komputasi berat.
+\end{itemize}
+
+\sdtSub{Deteksi \& Penanganan Outlier (Pencilan)}
+\begin{itemize}
+    \item \textbf{Deteksi Distribusi Normal (Z-Score):}
+    $$Z = \frac{X - \mu}{\sigma}, \quad \text{Outlier jika } |Z| > 3$$
+    \item \textbf{Deteksi Distribusi Miring / Skewed (IQR Rule):}
+    $$IQR = Q_3 - Q_1$$
+    $$\text{Batas Bawah} = Q_1 - 1.5 \times IQR$$
+    $$\text{Batas Atas} = Q_3 + 1.5 \times IQR$$
+    \item \textbf{Extreme Outlier:} Di luar $[Q_1 - 3 \times IQR, \ Q_3 + 3 \times IQR]$.
+    \item \textbf{Trimming (Pangkas):} Menghapus baris record outlier. Hanya boleh dilakukan jika outlier terbukti data error murni.
+    \item \textbf{Winsorizing:} Mengganti (*capping*) nilai ekstrem dengan batas persentil tertentu (contoh: nilai di bawah persentil ke-5 dijadikan nilai P5, nilai di atas P95 dijadikan nilai P95, atau dibatasi tepat pada pagar IQR). Seluruh sampel tetap utuh tanpa menghilangkan data.
+\end{itemize}
+
+\sdtSub{Diskretisasi \& Binning}
+Mengubah variabel numerik kontinu menjadi kelompok interval/kategori diskrit.
+\begin{itemize}
+    \item \textbf{Equal Width Binning:} Membagi rentang nilai menjadi $k$ kelompok dengan lebar interval seragam:
+    $$\text{Lebar Bin} = \frac{X_{\max} - X_{\min}}{k}$$
+    Sensitif terhadap outlier karena rentang tertarik oleh nilai ekstrem.
+    \item \textbf{Equal Frequency / Quantile Binning:} Membagi data ke dalam $k$ kelompok di mana setiap kelompok memiliki jumlah observasi yang sama ($N/k$). Mengatasi masalah sebaran miring (*skewness*).
+    \item \textbf{K-Means Binning:} Mengelompokkan nilai numerik ke dalam $k$ cluster menggunakan algoritma clustering 1D.
+\end{itemize}
+
+\sdtSub{Penskalaan Fitur (Feature Scaling)}
+\begin{itemize}
+    \item \textbf{Normalisasi (Min-Max Scaling):}
+    $$X_{\text{norm}} = \frac{X - X_{\min}}{X_{\max} - X_{\min}} \in [0, 1]$$
+    Mengubah nilai ke rentang pasti $[0, 1]$. Sangat sensitif terhadap outlier karena nilai $X_{\min}$ dan $X_{\max}$ mudah bergeser akibat pencilan.
+    \item \textbf{Standardisasi (Z-Score Standardization):}
+    $$X_{\text{std}} = \frac{X - \mu}{\sigma} \sim \mathcal{N}(0, 1)$$
+    Mengubah distribusi agar memiliki mean $\mu = 0$ dan standar deviasi $\sigma = 1$. Tidak dibatasi rentang tertentu dan lebih tahan (*robust*) terhadap outlier dibandingkan Min-Max.
+    \item \textbf{Robust Scaling:} Menggunakan Median dan IQR:
+    $$X_{\text{robust}} = \frac{X - \text{Median}}{IQR}$$
+    Sangat tahan terhadap pengaruh outlier ekstrem.
+    \item \textbf{Kapan Scaling Wajib Digunakan?}
+    \begin{itemize}
+        \item \textit{Algoritma Berbasis Jarak:} k-Nearest Neighbor (k-NN), K-Means Clustering, Support Vector Machines (SVM), Principal Component Analysis (PCA). Tanpa scaling, fitur dengan angka besar (misal gaji jutaan) akan mendominasi perhitungan jarak Euclidean dan menenggelamkan fitur angka kecil (misal usia puluhan).
+        \item \textit{Algoritma Berbasis Gradient Descent:} Linear Regression, Logistic Regression, Neural Networks / Deep Learning (mempercepat konvergensi gradien).
+        \item \textit{TIDAK BUTUH Scaling:} Algoritma berbasis pohon keputusan (Decision Tree, Random Forest, XGBoost) karena aturan percabangan (*splitting rule*) bersifat invariant terhadap transformasi monotonik.
+    \end{itemize}
+\end{itemize}
+
+% ============================================================================
+% MODUL 6: ANOTASI DATA, PELABELAN & QUALITY ASSURANCE
+% ============================================================================
+\sdtSection{6. ANOTASI DATA, PELABELAN \& QA}
+
+\sdtSub{Definisi \& Paradigma Pelabelan Data}
+Proses menambahkan label/tag terstruktur pada data mentah agar dapat digunakan dalam algoritma Supervised Learning.
+\begin{itemize}
+    \item \textbf{Supervised Learning:} Membutuhkan data dengan label kebenaran mutlak (*ground truth*) lengkap ($X \rightarrow y$).
+    \item \textbf{Unsupervised Learning:} Bekerja pada data mentah tanpa label untuk menemukan struktur alami ($X$).
+    \item \textbf{Semi-supervised Learning:} Menggabungkan sedikit data berlabel dengan kumpulan data besar tak berlabel untuk menekan biaya anotasi.
+    \item \textbf{Pseudo-Labeling:} Model AI yang dilatih dengan data berlabel awal memprediksi data tak berlabel; prediksi dengan probabilitas keyakinan tinggi dijadikan pseudo-label untuk melatih model kembali.
+    \item \textbf{Active Learning:} Model AI secara cerdas memilih sampel data yang paling tidak pasti (*uncertain*) di dekat decision boundary untuk diserahkan ke manusia guna dilabeli.
+    \item \textbf{Human-in-the-Loop (HITL):} Kolaborasi interaktif manusia dan AI: model melakukan pre-annotation otomatis, manusia memverifikasi dan memperbaiki edge cases.
+\end{itemize}
+
+\sdtSub{4 Pendekatan Operasional Pelabelan}
+\begin{enumerate}
+    \item \textbf{In-house Labelling:} Dikerjakan tim internal perusahaan. Kualitas sangat tinggi, keamanan rahasia data terjamin, namun mahal dan lambat.
+    \item \textbf{Crowdsourcing:} Memanfaatkan platform publik (Amazon MTurk, Clickworker). Sangat cepat dan murah untuk dataset masif, namun akurasi rentan bervariasi dan risiko kebocoran privasi tinggi.
+    \item \textbf{Outsourcing:} Menyerahkan anotasi ke vendor profesional pihak ketiga dengan perjanjian SLA kualitas terukur.
+    \item \textbf{Machine-based Annotation:} Pelabelan otomatis menggunakan model terakreditasi / heuristik (*weak supervision*). Kecepatan tinggi namun butuh audit berkala.
+\end{enumerate}
+
+\sdtSub{Jenis-Jenis Anotasi Berdasarkan Modalitas Data}
+\begin{itemize}
+    \item \textbf{Computer Vision (CV):}
+    \begin{itemize}
+        \item \textit{Bounding Box:} Kotak persegi panjang menandai lokasi objek (Object Detection, misal YOLO).
+        \item \textit{Polygon Annotation:} Poligon mendetail mengikuti kontur objek kompleks (citra medis, satelit).
+        \item \textit{Semantic Segmentation:} Klasifikasi per piksel pada seluruh gambar (mobil otonom membedakan jalan vs trotoar).
+        \item \textit{Keypoint Annotation:} Menandai titik persendian tubuh / wajah (pose estimation, facial landmark).
+        \item \textit{3D Cuboid:} Kotak spasial 3D dengan dimensi panjang, lebar, kedalaman (LiDAR / radar otonom).
+    \end{itemize}
+    \item \textbf{Natural Language Processing (NLP):}
+    \begin{itemize}
+        \item \textit{Text Classification:} Melabeli seluruh dokumen (Sentimen, Kategori Berita, Spam/Ham).
+        \item \textit{Named Entity Recognition (NER):} Menandai entitas kata penting (Nama Orang, Organisasi, Lokasi, Tanggal).
+        \item \textit{Part-of-Speech (POS) Tagging:} Menandai peran gramatikal kata (Verba, Nomina, Adjektiva).
+        \item \textit{Phonetic Annotation:} Anotasi representasi bunyi ujaran untuk sistem speech-to-text / pengenalan suara.
+    \end{itemize}
+\end{itemize}
+
+\sdtSub{Quality Assurance (QA) \& Uji Reliabilitas Pelabelan}
+\begin{itemize}
+    \item \textbf{Consensus / Inter-Annotator Agreement:} Mengukur kesepakatan antar-annotator independen pada sampel yang sama menggunakan Cohen's Kappa ($\kappa$) untuk 2 annotator atau Fleiss' Kappa untuk $>2$ annotator.
+    \item \textbf{Gold Standard Testing:} Menyisipkan sampel data yang telah diketahui label pastinya (*ground truth*) secara acak ke antrean annotator untuk menguji akurasi kerja mereka secara berkala.
+    \item \textbf{Cronbach's Alpha Test:} Menguji konsistensi internal instrumen dan reliabilitas skor pelabelan:
+    $$\alpha = \frac{K}{K - 1} \left( 1 - \frac{\sum_{i=1}^K \sigma_i^2}{\sigma_X^2} \right)$$
+    di mana $K$ adalah jumlah butir/evaluator, $\sigma_i^2$ adalah varians butir ke-$i$, dan $\sigma_X^2$ adalah varians total skor.
+    \item \textbf{Pedoman Interpretasi Skor Cronbach's Alpha:}
+    \begin{itemize}
+        \item $\alpha \geq 0.90$: Reliabilitas Sangat Tinggi / Sempurna (\textit{Excellent})
+        \item $0.80 \leq \alpha < 0.90$: Reliabilitas Baik (\textit{Good})
+        \item $0.70 \leq \alpha < 0.80$: Reliabilitas Cukup / Diterima (\textit{Acceptable})
+        \item $\alpha < 0.70$: Reliabilitas Meragukan / Kurang (\textit{Questionable/Poor})
+    \end{itemize}
+\end{itemize}
+
+% ============================================================================
+% MODUL 7: BANK SOAL & KUNCI JAWABAN QUIZ DOSEN
+% ============================================================================
+\sdtSection[sdtGreen]{7. BANK SOAL \& KUNCI JAWABAN QUIZ DOSEN}
+
+\quizBox{Apa itu Artificial Intelligence (AI)?}{Bidang ilmu komputer yang berfokus menciptakan sistem cerdas yang mampu meniru kemampuan kognitif manusia (belajar dari data, bernalar, memahami bahasa, dan memecahkan masalah).}
+
+\quizBox{Kelebihan utama AI dibanding manusia dalam proses pembelajaran dan pengalaman adalah...}{Mampu memproses dan menganalisis volume data raksasa dalam waktu singkat tanpa kelelahan fisik, serta menghasilkan replikasi keputusan yang konsisten.}
+
+\quizBox{Dalam tim Data Science, peran yang bertugas menganalisis data untuk mencari insight dan menyajikannya dalam dashboard adalah...}{Data Analyst (atau Business Intelligence Analyst).}
+
+\quizBox{Peran dalam tim Data Science yang bertanggung jawab menyiapkan infrastruktur IT dan deployment model ke sistem produksi adalah...}{Machine Learning Engineer / Data Engineer / MLOps Engineer.}
+
+\quizBox{Isu etika AI di mana model AI memberikan keputusan diskriminatif akibat ketidakseimbangan data historis disebut...}{Algorithmic Bias / Historical Bias.}
+
+\quizBox{Urutan hirarki dari tingkat terendah hingga tertinggi pada DIKW pyramid adalah...}{Data $\rightarrow$ Information $\rightarrow$ Knowledge $\rightarrow$ Wisdom.}
+
+\quizBox{Pada piramida DIKW, kumpulan angka acak atau fakta mentah tanpa konteks dikategorikan sebagai...}{Data.}
+
+\quizBox{Metodologi pengembangan perangkat lunak (SDLC) yang sangat cocok untuk kondisi di mana kebutuhan pengguna belum jelas adalah...}{Prototype (atau Agile).}
+
+\quizBox{Notasi diagram standar yang umum digunakan untuk memodelkan alur proses bisnis dalam suatu organisasi adalah...}{BPMN (Business Process Model and Notation).}
+
+\quizBox{Metodologi Data Science yang bersifat non-proprietary, netral terhadap aplikasi/alat, dan fokus pada masalah bisnis adalah...}{CRISP-DM (Cross-Industry Standard Process for Data Mining).}
+
+\quizBox{Kesalahan pada proyek AI di mana informasi dari data pengujian (test data) bocor ke dalam data pelatihan (training data) disebut...}{Data Leakage.}
+
+\quizBox{Istilah populer 'Garbage In, Garbage Out' dalam Data Science bermakna...}{Jika kualitas data masukan buruk/salah/noise, maka model yang dihasilkan dan prediksinya akan salah/tidak berguna, secanggih apa pun algoritma yang dipakai.}
+
+\quizBox{Jenis tugas analitik data science yang bertujuan memprediksi nilai numerik kontinu (seperti harga rumah atau suhu) adalah...}{Regression / Estimation.}
+
+\quizBox{Mengelompokkan data pelanggan berdasarkan kemiripan pola tanpa adanya label target dinamakan...}{Clustering (Unsupervised Learning).}
+
+\quizBox{Kegiatan mengintegrasikan model Machine Learning yang telah dilatih ke dalam aplikasi produksi atau sistem informasi berjalan dilakukan pada tahap...}{Deployment (Tahap 6 CRISP-DM).}
+
+\quizBox{Tujuan utama dari dilakukannya tahap Data Understanding setelah Business Understanding adalah...}{Mengenal, mendeskripsikan, mengeksplorasi karakteristik data yang tersedia, serta memverifikasi kesesuaian kualitasnya terhadap masalah bisnis yang ingin dipecahkan.}
+
+\quizBox{Dokumen luaran Data Understanding yang melaporkan masalah missing data, kesalahan ejaan, dan nilai tidak wajar (outlier) adalah...}{Data Quality Report.}
+
+\quizBox{Unit data terkecil yang merepresentasikan satu nilai tunggal dari satu variabel tertentu disebut...}{Datum (atau Data Item).}
+
+\quizBox{Dokumen teks bebas, file rekaman audio, dan rekaman video dikategorikan sebagai jenis data...}{Unstructured Data (Data Tidak Terstruktur).}
+
+\quizBox{Email memuat struktur header teratur (pengirim, tanggal) namun isi pesannya berupa teks bebas. Email tergolong data...}{Semi-structured Data (Data Semi-Terstruktur).}
+
+\quizBox{Jenis data kategorikal yang tepat hanya memiliki dua pilihan kategori diskrit (seperti Ya/Tidak atau Lulus/Gagal) disebut...}{Data Dikotomi / Biner (Dichotomous Data).}
+
+\quizBox{Data nilai tukar mata uang IDR/USD yang dicatat harian dari tahun 2016 hingga 2020 dinamakan...}{Data Time-Series / Deret Waktu (atau Longitudinal Data).}
+
+\quizBox{Model data yang merepresentasikan objek sebagai titik (node) dan hubungan antar entitas sebagai garis (edge) dinamakan...}{Graph / Network Data Model.}
+
+\quizBox{Jenis diagram visualisasi yang cocok digunakan untuk menunjukkan persentase proporsi kategori terhadap keseluruhan data adalah...}{Pie Chart.}
+
+\quizBox{Visualisasi yang paling ideal untuk melihat tren perkembangan atau perubahan nilai berkelanjutan dari waktu ke waktu adalah...}{Line Graph (Grafik Garis).}
+
+\quizBox{Plot visualisasi yang menampilkan titik-titik data untuk melihat hubungan linier atau pola outlier antara dua variabel numerik adalah...}{Scatter Plot.}
+
+\quizBox{Teknik visualisasi yang menggunakan matriks pemetaan warna (color code) untuk merepresentasikan kepadatan atau nilai variabel adalah...}{Heatmap.}
+
+\quizBox{Grafik visualisasi satu dimensi yang digunakan untuk menampilkan distribusi frekuensi dari data numerik kontinu dinamakan...}{Histogram.}
+
+\quizBox{Visualisasi statistik yang menyajikan nilai Kuartil 1, Median (Kuartil 2), Kuartil 3, serta titik outlier dinamakan...}{Boxplot (Box-and-Whisker Plot).}
+
+\quizBox{Jika hasil pengujian statistik korelasi menghasilkan p-value $<$ 0.001, hal ini berarti...}{Hubungan korelasi tersebut sangat signifikan secara statistik (sangat kecil kemungkinan hubungan terjadi karena faktor kebetulan acak).}
+
+\quizBox{Metode statistik ANOVA (Analysis of Variance) digunakan untuk...}{Menguji signifikansi perbedaan nilai rata-rata (*mean*) antara 3 kelompok atau lebih.}
+
+\quizBox{Dalam analisis ANOVA, F-Score yang bernilai sangat besar mengindikasikan bahwa...}{Variasi nilai antar-kelompok jauh lebih besar dibandingkan variasi di dalam masing-masing kelompok (perbedaan antarkelompok signifikan).}
+
+% ============================================================================
+% MODUL 8: SINTAKS PYTHON UNTUK EDA & DATA PREPARATION
+% ============================================================================
+\sdtSection[sdtPurple]{8. CHEAT SHEET SINTAKS PYTHON (PANDAS, SCIPY)}
+
+\sdtSub{Eksplorasi Data \& Statistik Deskriptif}
+\begin{lstlisting}[language=Python]
+import pandas as pd
+import numpy as np
+import scipy.stats as stats
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+df = pd.read_csv("dataset.csv")
+df.info()                  # Tipe data, baris non-null, pemakaian RAM
+df.describe()              # Mean, std, min, Q1, median, Q3, max
+df.isnull().sum()          # Menghitung jumlah missing per kolom
+df.isnull().mean() * 100   # Persentase missing per kolom
+df['kategori'].value_counts(normalize=True) * 100 # Proporsi %
+\end{lstlisting}
+
+\sdtSub{Imputasi Missing Values \& Deteksi Outlier}
+\begin{lstlisting}[language=Python]
+# Imputasi Mean/Median
+df['usia'].fillna(df['usia'].median(), inplace=True)
+# Imputasi Modus (Kategorikal)
+df['shift'].fillna(df['shift'].mode()[0], inplace=True)
+# Imputasi Arbitrary
+df['gaji'].fillna(-999, inplace=True)
+
+# Deteksi Outlier dengan IQR Rule
+Q1 = df['jam_kerja'].quantile(0.25)
+Q3 = df['jam_kerja'].quantile(0.75)
+IQR = Q3 - Q1
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+outliers = df[(df['jam_kerja'] < lower_bound) | (df['jam_kerja'] > upper_bound)]
+
+# Winsorizing (Capping pada batas IQR)
+df['jam_kerja_clean'] = np.clip(df['jam_kerja'], lower_bound, upper_bound)
+\end{lstlisting}
+
+\sdtSub{Transformasi \& Penskalaan Fitur (Scaling)}
+\begin{lstlisting}[language=Python]
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
+
+# Normalisasi Min-Max (Rentang [0, 1])
+scaler_mm = MinMaxScaler()
+df[['jam_norm']] = scaler_mm.fit_transform(df[['jam_kerja']])
+
+# Standardisasi Z-Score (Mean=0, Std=1)
+scaler_std = StandardScaler()
+df[['jam_std']] = scaler_std.fit_transform(df[['jam_kerja']])
+
+# Equal Width Binning
+df['jam_bin_width'] = pd.cut(df['jam_kerja'], bins=3, labels=['Rendah','Sedang','Tinggi'])
+# Equal Frequency Binning (Quantile)
+df['jam_bin_freq'] = pd.qcut(df['jam_kerja'], q=3, labels=['Rendah','Sedang','Tinggi'])
+\end{lstlisting}
+
+\sdtSub{Korelasi Pearson \& ANOVA Test}
+\begin{lstlisting}[language=Python]
+# Korelasi Pearson & P-Value
+r_val, p_val = stats.pearsonr(df['engine-size'], df['price'])
+print(f"Pearson r: {r_val:.4f}, p-value: {p_val:.4e}")
+
+# ANOVA (Membandingkan mean harga pada 3 jenis roda: fwd, rwd, 4wd)
+g_fwd = df[df['drive-wheels'] == 'fwd']['price'].dropna()
+g_rwd = df[df['drive-wheels'] == 'rwd']['price'].dropna()
+g_4wd = df[df['drive-wheels'] == '4wd']['price'].dropna()
+f_score, p_score = stats.f_oneway(g_fwd, g_rwd, g_4wd)
+print(f"ANOVA F-Score: {f_score:.2f}, P-Value: {p_score:.4e}")
+
+# Groupby & Pivot Table Heatmap
+pivot_table = df.pivot_table(index='body-style', columns='drive-wheels', values='price', aggfunc='mean')
+sns.heatmap(pivot_table, annot=True, fmt='.0f', cmap='Blues')
+\end{lstlisting}
+
+\vfill
+\begin{center}
+{\fontsize{5pt}{6pt}\selectfont\textcolor{sdtDarkGray}{%
+Cheat Sheet Sains Data Terapan (SVPL261506) \textbar{} Disusun Lengkap Berdasarkan Seluruh 7 Modul PPTX \textbar{} Sem. Gasal 2026/2027 \textbar{} Sukses UTS!%
+}}
+\end{center}
+
+\end{multicols*}
+\end{document}
