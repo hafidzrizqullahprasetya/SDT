@@ -1,0 +1,20 @@
+# ==============================================================================
+# Dataset Deteksi Truk ODOL (Overdimension Overload) & Kargo Berbahaya
+# Mata Kuliah: Sains Data Terapan (SVPL261506) - Semester Gasal 2026/2027
+# Program Studi: Sarjana Terapan Teknologi Rekayasa Perangkat Lunak (TRPL)
+# Departemen Teknik Elektro dan Informatika (TEDI), Sekolah Vokasi UGM
+# Peneliti / Anotator: Hafidz Rizqullah Prasetya (NIU: 535493)
+# Dosen Pengampu: Dr. Muhammad Fakhrurrifqi, S.Kom., M.Cs.
+# ==============================================================================
+
+path: ./dataset
+train: train/images
+val: valid/images
+test: test/images
+
+# Metadata Kelas Deteksi
+nc: 3
+names:
+  0: roda
+  1: truk_normal
+  2: truk_odol

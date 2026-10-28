@@ -9,3 +9,7 @@ __pycache__/
 *.toc
 preview/
 uts_extracted/
+tugas/dataset/
+tugas/*.zip
+runs/
+*.pt
