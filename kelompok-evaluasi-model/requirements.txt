@@ -1,0 +1,8 @@
+numpy
+pandas
+matplotlib
+pillow
+scikit-learn
+jupyter
+# hanya untuk verifikasi AP dan membuat ulang prediksi deteksi
+ultralytics

@@ -1,0 +1,14 @@
+Bagian,Metrik,Nilai
+Regresi (WIM),MAE,1.370 ton
+Regresi (WIM),RMSE,1.544 ton
+Regresi (WIM),R²,0.9714
+Regresi (WIM),MAPE,6.09 %
+Clustering (k=3),Inertia,952.50
+Clustering (k=3),Silhouette,0.6294
+Clustering (k=3),Davies-Bouldin,0.4627
+Klasifikasi 3 kelas,Accuracy,0.7667
+Klasifikasi 3 kelas,Macro F1,0.7442
+Klasifikasi 3 kelas,Weighted F1,0.7648
+Deteksi objek (YOLO11n),Precision (semua kelas),0.7222
+Deteksi objek (YOLO11n),Recall (semua kelas),0.8125
+Deteksi objek (YOLO11n),mAP@0.50,0.6919
